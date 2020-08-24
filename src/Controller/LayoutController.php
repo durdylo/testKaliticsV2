@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Form\UserType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LayoutController extends AbstractController
 {
@@ -64,5 +68,27 @@ class LayoutController extends AbstractController
     public function consultations_chantier()
     {
         return $this->render('layout/consultations_chantier.html.twig');
+    }
+
+    /**
+     * @Route("/user/{id}/edit", name="user_edit_role")
+     */
+    public function editRoleAction(Request $request, User $user)
+    {
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'user updated!');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('layout/editUser.html.twig', [
+            'userForm' => $form->createView()
+        ]);
     }
 }

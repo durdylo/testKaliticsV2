@@ -60,22 +60,22 @@
        <li class="nav-item">
         <a class="nav-link" href="{{ path('consultations_chantier') }}">Consultation chantier</a>
       </li>
-                              {% endif %}
+      {% endif %}
 
       {% endfor %}
- </li> <li class="nav-item">
+ 
+ <li class="nav-item">
         <a class="nav-link" href="{{ path('app_logout') }}">logout</a>
-      </li>    {% else %}
+      </li>  
+
+ <li class="nav-item">
+        <a class="nav-link" href="{{ path('user_edit_role', {'id': app.user.id}) }}">parametre user</a>
+      </li>  
+        {% else %}
  </li> <li class="nav-item">
         <a class="nav-link" href="{{ path('app_login') }}">login</a>
-      </li>
-      
-{% endif %}
-      
-
-      {# <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li> #}
+      </li>   
+  {% endif %} 
     </ul>
    
   </div>
