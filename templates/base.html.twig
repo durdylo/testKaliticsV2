@@ -22,23 +22,56 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ path('home') }}">Accueil </a>
       </li>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% for role in app.user.roles %}
+ 
+      {% if role == 'ROLE_AGENDA' %}
+
       <li class="nav-item">
         <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
       </li>
+      {% endif %}
+      {% if role == 'ROLE_APP_SETTING' %}
+
        <li class="nav-item">
         <a class="nav-link" href="{{ path('parametre') }}">Parametre</a>
-      </li> <li class="nav-item">
+      </li>
+            {% endif %}
+      {% if role == 'ROLE_PAY' %}
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ path('fiches_de_paie') }}">Fiche de paie</a>
-      </li> <li class="nav-item">
+      </li>
+                  {% endif %}
+       {% if role == 'ROLE_GED' %}
+
+ <li class="nav-item">
         <a class="nav-link" href="{{ path('gestion') }}">Gestion </a>
-      </li> <li class="nav-item">
+      </li>
+                        {% endif %}
+       {% if role == 'ROLE_TEAM_MEETING' %}
+
+       <li class="nav-item">
         <a class="nav-link" href="{{ path('reunions') }}">Réunions d'équipe</a>
-      </li> <li class="nav-item">
+      </li>
+                              {% endif %}
+       {% if role == 'ROLE_SITE' %}
+
+       <li class="nav-item">
         <a class="nav-link" href="{{ path('consultations_chantier') }}">Consultation chantier</a>
       </li>
-       </li> <li class="nav-item">
+                              {% endif %}
+
+      {% endfor %}
+ </li> <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout') }}">logout</a>
+      </li>    {% else %}
+ </li> <li class="nav-item">
         <a class="nav-link" href="{{ path('app_login') }}">login</a>
       </li>
+      
+{% endif %}
+      
 
       {# <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
