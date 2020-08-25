@@ -25,7 +25,7 @@ class UsersFixtures extends Fixture
         $user1->setRoles(['ROLE_SUPER_ADMIN']);
         $user1->setPassword($this->passwordEncoder->encodePassword(
             $user1,
-            "password1"
+            "Password1."
         ));
 
         $manager->persist($user1);
@@ -35,7 +35,7 @@ class UsersFixtures extends Fixture
         $user2->setRoles(['ROLE_DIRECTION']);
         $user2->setPassword($this->passwordEncoder->encodePassword(
             $user2,
-            "password2"
+            "Password2."
         ));
 
         $manager->persist($user2);
@@ -45,7 +45,7 @@ class UsersFixtures extends Fixture
         $user3->setRoles(['ROLE_RH']);
         $user3->setPassword($this->passwordEncoder->encodePassword(
             $user3,
-            "password3"
+            "Password3."
         ));
 
         $manager->persist($user3);
@@ -56,7 +56,7 @@ class UsersFixtures extends Fixture
         $user4->setRoles(['ROLE_MANAGER_EQUIPE']);
         $user4->setPassword($this->passwordEncoder->encodePassword(
             $user4,
-            "password4"
+            "Password4."
         ));
 
         $manager->persist($user4);
@@ -66,7 +66,7 @@ class UsersFixtures extends Fixture
         $user5->setRoles(['ROLE_OPERATEUR']);
         $user5->setPassword($this->passwordEncoder->encodePassword(
             $user5,
-            "password5"
+            "Password5."
         ));
 
         $manager->persist($user5);
