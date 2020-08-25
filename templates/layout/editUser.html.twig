@@ -3,9 +3,15 @@
 
 {% block body %}
     <h1>Editer fonction</h1>
+<form action="{{ path('user_edit_role', {'id': app.user.id}) }}" method="post">
+    <select name="fonction" id="">
+        <option value="1">super admin</option>
+        <option value="2">Direction</option>
+        <option value="3">ressources humaines</option>
+        <option value="4">Manager d’équipes</option>
+        <option value="5">Opérateur</option>
+</select>
 
-     {{form_start(userForm)}}
-    {{form_widget(userForm)}}
-    <button type="submit" class="btn btn-success">changer fonction </button>
-    {{form_end(userForm)}}
+<button type="submit">ok</button>
+</form>
 {% endblock %}

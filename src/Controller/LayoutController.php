@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Fonction;
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LayoutController extends AbstractController
 {
@@ -155,22 +157,21 @@ class LayoutController extends AbstractController
     /**
      * @Route("/user/{id}/edit", name="user_edit_role")
      */
-    public function editRoleAction(Request $request, User $user)
+    public function editRoleAction(EntityManagerInterface $manager, Request $request, User $user)
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $fonctionId = $request->request->get('fonction');
+        $fonctionRepo = $manager->getRepository(Fonction::class);
+        if (isset($fonctionId)) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $fonction = $fonctionRepo->find($fonctionId);
+            $user->setFonction($fonction);
+            $manager->persist($user);
+            $manager->flush();
 
-            $this->addFlash('success', 'user updated!');
             return $this->redirectToRoute('home');
         }
-        return $this->render('layout/editUser.html.twig', [
-            'userForm' => $form->createView()
-        ]);
+
+
+        return $this->render('layout/editUser.html.twig');
     }
 }
