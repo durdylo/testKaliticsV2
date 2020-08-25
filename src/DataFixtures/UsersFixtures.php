@@ -12,14 +12,6 @@ class UsersFixtures extends Fixture
 
 {
     private $passwordEncoder;
-    public $superAdministrateur = ['ROLE_APP_SETTING', 'ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
-    public $direction = ['ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
-    public $ressourcesHumaines = ['ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA'];
-    public $managerEquipes = ['ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
-    public $operateur = ['ROLE_AGENDA'];
-
-
-
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
@@ -30,7 +22,7 @@ class UsersFixtures extends Fixture
 
         $user1 = new User;
         $user1->setEmail("user1@mail.fr");
-        $user1->setRoles($this->superAdministrateur);
+        $user1->setRoles(['ROLE_SUPER_ADMIN']);
         $user1->setPassword($this->passwordEncoder->encodePassword(
             $user1,
             "password1"
@@ -40,7 +32,7 @@ class UsersFixtures extends Fixture
 
         $user2 = new User;
         $user2->setEmail("user2@mail.fr");
-        $user2->setRoles($this->direction);
+        $user2->setRoles(['ROLE_DIRECTION']);
         $user2->setPassword($this->passwordEncoder->encodePassword(
             $user2,
             "password2"
@@ -50,7 +42,7 @@ class UsersFixtures extends Fixture
 
         $user3 = new User;
         $user3->setEmail("user3@mail.fr");
-        $user3->setRoles($this->ressourcesHumaines);
+        $user3->setRoles(['ROLE_RH']);
         $user3->setPassword($this->passwordEncoder->encodePassword(
             $user3,
             "password3"
@@ -61,7 +53,7 @@ class UsersFixtures extends Fixture
 
         $user4 = new User;
         $user4->setEmail("user4@mail.fr");
-        $user4->setRoles($this->managerEquipes);
+        $user4->setRoles(['ROLE_MANAGER_EQUIPE']);
         $user4->setPassword($this->passwordEncoder->encodePassword(
             $user4,
             "password4"
@@ -71,7 +63,7 @@ class UsersFixtures extends Fixture
 
         $user5 = new User;
         $user5->setEmail("user5@mail.fr");
-        $user5->setRoles($this->operateur);
+        $user5->setRoles(['ROLE_OPERATEUR']);
         $user5->setPassword($this->passwordEncoder->encodePassword(
             $user5,
             "password5"

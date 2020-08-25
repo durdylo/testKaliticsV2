@@ -23,18 +23,37 @@ security:
             logout:
                 path: app_logout
                 target: home
-
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-    access_control:
-        - { path: ^/agenda, roles: ROLE_AGENDA }
-        - { path: ^/parametre, roles: ROLE_APP_SETTING }
-        - { path: ^/fiches_de_paie, roles: ROLE_PAY }
-        - { path: ^/gestion, roles: ROLE_GED }
-        - { path: ^/reunions, roles: ROLE_TEAM_MEETING }
-        - { path: ^/consultations_chantier, roles: ROLE_SITE }
+    # access_control:
+    #     - { path: ^/parametre, roles: [ROLE_SUPER_ADMIN] }
+    #     - {
+    #           path: ^/agenda,
+    #           roles:
+    #               [
+    #                   ROLE_SUPER_ADMIN,
+    #                   ROLE_DIRECTION,
+    #                   ROLE_RH,
+    #                   ROLE_MANAGER_EQUIPE,
+    #               ],
+    #       }
+    #     - {
+    #           path: ^/fiches_de_paie,
+    #           roles: [ROLE_SUPER_ADMIN, ROLE_DIRECTION, ROLE_RH],
+    #       }
+    #     - {
+    #           path: ^/gestion,
+    #           roles: [ROLE_SUPER_ADMIN, ROLE_DIRECTION, ROLE_RH],
+    #       }
+    #     - {
+    #           path: ^/reunions,
+    #           roles: [ROLE_SUPER_ADMIN, ROLE_DIRECTION, ROLE_MANAGER_EQUIPE],
+    #       }
+    #     - {
+    #           path: ^/consultations_chantier,
+    #           roles: [ROLE_SUPER_ADMIN, ROLE_DIRECTION, ROLE_MANAGER_EQUIPE],
+    #       }

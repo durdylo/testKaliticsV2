@@ -11,7 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
 {
-
+    public $superAdministrateur = ['ROLE_APP_SETTING', 'ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
+    public $direction = ['ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
+    public $ressourcesHumaines = ['ROLE_PAY', 'ROLE_GED', 'ROLE_AGENDA'];
+    public $managerEquipes = ['ROLE_AGENDA', 'ROLE_TEAM_MEETING', 'ROLE_SITE'];
+    public $operateur = ['ROLE_AGENDA'];
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -22,7 +26,8 @@ class UserType extends AbstractType
                     'Ressources Humaines' =>  'ROLE_RH',
                     'manager equipes ' => 'ROLE_MANAGER_EQUIPE',
                     'opérateur' =>  'ROLE_OPERATEUR',
-                ]
+                ],
+                'multiple' => true,
             ])
             ->getForm();
     }

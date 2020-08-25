@@ -24,7 +24,98 @@
       </li>
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 {% for role in app.user.roles %}
- 
+  {% if role == 'ROLE_SUPER_ADMIN' %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('parametre') }}">Parametres Application</a>
+      </li>
+
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
+      </li>
+     
+
+       <li class="nav-item">
+        <a class="nav-link" href="{{ path('fiches_de_paie') }}">Fiche de paie</a>
+      </li>
+
+     <li class="nav-item">
+        <a class="nav-link" href="{{ path('gestion') }}">gestion documentaire</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('reunions') }}">Réunions d'équipe</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('consultations_chantier') }}">Consultation chantier</a>
+      </li>
+            {% endif %}
+ {% if role == 'ROLE_DIRECTION' %}
+    
+      
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
+      </li>
+     
+
+       <li class="nav-item">
+        <a class="nav-link" href="{{ path('fiches_de_paie') }}">Fiche de paie</a>
+      </li>
+
+     <li class="nav-item">
+        <a class="nav-link" href="{{ path('gestion') }}">gestion documentaire</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('reunions') }}">Réunions d'équipe</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('consultations_chantier') }}">Consultation chantier</a>
+      </li>
+            {% endif %}
+
+       {% if role == 'ROLE_RH' %}
+    
+      
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
+      </li>
+     
+
+       <li class="nav-item">
+        <a class="nav-link" href="{{ path('fiches_de_paie') }}">Fiche de paie</a>
+      </li>
+
+     <li class="nav-item">
+        <a class="nav-link" href="{{ path('gestion') }}">gestion documentaire</a>
+      </li>
+            {% endif %}
+
+      {% if role == 'ROLE_MANAGER_EQUIPE' %}
+    
+      
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
+      </li>
+     
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('reunions') }}">Réunions d'équipe</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('consultations_chantier') }}">Consultation chantier</a>
+      </li>
+            {% endif %}
+
+       {% if role == 'ROLE_OPERATEUR' %}
+    
+      
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('agenda') }}">Agenda</a>
+      </li>
+   
+            {% endif %}
       {% if role == 'ROLE_AGENDA' %}
 
       <li class="nav-item">
@@ -34,7 +125,7 @@
       {% if role == 'ROLE_APP_SETTING' %}
 
        <li class="nav-item">
-        <a class="nav-link" href="{{ path('parametre') }}">Parametre</a>
+        <a class="nav-link" href="{{ path('parametre') }}">Parametres Application</a>
       </li>
             {% endif %}
       {% if role == 'ROLE_PAY' %}
@@ -46,7 +137,7 @@
        {% if role == 'ROLE_GED' %}
 
  <li class="nav-item">
-        <a class="nav-link" href="{{ path('gestion') }}">Gestion </a>
+        <a class="nav-link" href="{{ path('gestion') }}">gestion documentaire</a>
       </li>
                         {% endif %}
        {% if role == 'ROLE_TEAM_MEETING' %}
@@ -63,13 +154,15 @@
       {% endif %}
 
       {% endfor %}
+
+   
  
  <li class="nav-item">
         <a class="nav-link" href="{{ path('app_logout') }}">logout</a>
       </li>  
 
  <li class="nav-item">
-        <a class="nav-link" href="{{ path('user_edit_role', {'id': app.user.id}) }}">parametre user</a>
+        <a class="nav-link" href="{{ path('user_edit_role', {'id': app.user.id}) }}">Fonction utilisateur</a>
       </li>  
         {% else %}
  </li> <li class="nav-item">

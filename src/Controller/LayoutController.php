@@ -75,7 +75,7 @@ class LayoutController extends AbstractController
      */
     public function editRoleAction(Request $request, User $user)
     {
-        $form = $this->createForm(UserType::class);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
