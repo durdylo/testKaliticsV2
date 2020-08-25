@@ -34,6 +34,12 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Fonction::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Fonction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +116,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getFonction(): ?Fonction
+    {
+        return $this->Fonction;
+    }
+
+    public function setFonction(?Fonction $Fonction): self
+    {
+        $this->Fonction = $Fonction;
+
+        return $this;
     }
 }
