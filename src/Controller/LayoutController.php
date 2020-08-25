@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class LayoutController extends AbstractController
 {
@@ -26,7 +27,19 @@ class LayoutController extends AbstractController
      */
     public function agenda()
     {
-        return $this->render('layout/agenda.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_AGENDA') {
+                return $this->render('layout/agenda.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 
     /**
@@ -34,7 +47,19 @@ class LayoutController extends AbstractController
      */
     public function parametre()
     {
-        return $this->render('layout/parametre.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_APP_SETTING') {
+                return $this->render('layout/parametre.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 
     /**
@@ -42,7 +67,19 @@ class LayoutController extends AbstractController
      */
     public function fiches_de_paie()
     {
-        return $this->render('layout/fiches_de_paie.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_PAY') {
+                return $this->render('layout/fiches_de_paie.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 
     /**
@@ -50,7 +87,19 @@ class LayoutController extends AbstractController
      */
     public function gestion()
     {
-        return $this->render('layout/gestion.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_GED') {
+                return $this->render('layout/gestion.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 
     /**
@@ -58,7 +107,19 @@ class LayoutController extends AbstractController
      */
     public function reunions()
     {
-        return $this->render('layout/reunions.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_TEAM_MEETING') {
+                return $this->render('layout/reunions.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 
 
@@ -67,7 +128,28 @@ class LayoutController extends AbstractController
      */
     public function consultations_chantier()
     {
-        return $this->render('layout/consultations_chantier.html.twig');
+        $user = $this->getUser();
+
+        $fonction = $user->getFonction();
+
+        $roles = $fonction->getRoles();
+
+        foreach ($roles as $role) {
+
+            if ($role->getName() == 'ROLE_SITE') {
+
+                return $this->render('layout/consultations_chantier.html.twig');
+            }
+        }
+        return $this->redirectToRoute('denied_acces');
+    }
+
+    /**
+     * @Route("/acces_refuse", name="denied_acces")
+     */
+    public function deniedAcces()
+    {
+        return $this->render('layout/deniedacces.html.twig');
     }
 
     /**
