@@ -29,11 +29,8 @@ class LayoutController extends AbstractController
      */
     public function agenda()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
-
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -49,11 +46,9 @@ class LayoutController extends AbstractController
      */
     public function parametre()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
 
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -69,11 +64,8 @@ class LayoutController extends AbstractController
      */
     public function fiches_de_paie()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
-
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -89,11 +81,8 @@ class LayoutController extends AbstractController
      */
     public function gestion()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
-
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -109,11 +98,9 @@ class LayoutController extends AbstractController
      */
     public function reunions()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
 
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -130,11 +117,9 @@ class LayoutController extends AbstractController
      */
     public function consultations_chantier()
     {
-        $user = $this->getUser();
 
-        $fonction = $user->getFonction();
 
-        $roles = $fonction->getRoles();
+        $roles = $this->getRolesUser();
 
         foreach ($roles as $role) {
 
@@ -173,5 +158,17 @@ class LayoutController extends AbstractController
 
 
         return $this->render('layout/editUser.html.twig');
+    }
+
+    public function getRolesUser()
+    {
+        $user = $this->getUser();
+        if (isset($user)) {
+            $fonction = $user->getFonction();
+            $roles = $fonction->getRoles();
+
+            return $roles;
+        }
+        return $this->redirectToRoute('denied_acces');
     }
 }
